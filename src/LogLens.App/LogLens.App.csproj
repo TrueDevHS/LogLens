@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogLens.Core\LogLens.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>LogLens</AssemblyName>
+    <RootNamespace>LogLens.App</RootNamespace>
+    <Version>0.1.0</Version>
+    <Authors>LogLens</Authors>
+    <Description>Offline, read-only log analysis for Windows.</Description>
+  </PropertyGroup>
+
+</Project>

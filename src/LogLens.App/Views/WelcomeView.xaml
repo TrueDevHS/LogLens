@@ -1,0 +1,235 @@
+<UserControl x:Class="LogLens.App.Views.WelcomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid Margin="52,44,52,40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition Width="2*" MinWidth="285" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel VerticalAlignment="Center">
+                    <Border Width="164"
+                            Padding="12,7"
+                            HorizontalAlignment="Left"
+                            Background="{DynamicResource SuccessSoftBrush}"
+                            CornerRadius="16">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="8"
+                                     Height="8"
+                                     Margin="0,0,8,0"
+                                     VerticalAlignment="Center"
+                                     Fill="{DynamicResource SuccessBrush}" />
+                            <TextBlock FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="#167A53"
+                                       Text="100% Local Processing" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Margin="0,22,0,0"
+                               FontSize="46"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource PrimaryTextBrush}"
+                               Text="LogLens" />
+                    <TextBlock Margin="0,12,0,0"
+                               MaxWidth="610"
+                               HorizontalAlignment="Left"
+                               FontSize="21"
+                               FontWeight="Normal"
+                               Foreground="{DynamicResource PrimaryTextBrush}"
+                               Text="Understand your logs without sending them anywhere."
+                               TextWrapping="Wrap" />
+                    <TextBlock Margin="0,16,0,0"
+                               MaxWidth="610"
+                               HorizontalAlignment="Left"
+                               FontSize="14"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               LineHeight="22"
+                               Text="Choose a text log to turn difficult-to-read entries into a clear, searchable dashboard. Original files are opened read-only and are never modified."
+                               TextWrapping="Wrap" />
+
+                    <StackPanel Margin="0,28,0,0" Orientation="Horizontal">
+                        <Button x:Name="OpenLogFileButton"
+                                Width="158"
+                                HorizontalAlignment="Left"
+                                Click="OpenLogFileButton_Click"
+                                Content="Open Log File"
+                                Style="{StaticResource PrimaryButtonStyle}" />
+                        <TextBlock Margin="14,0,0,0"
+                                   MaxWidth="190"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   Text="or drag one .log or .txt file onto this window"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Grid x:Name="LoadingPanel"
+                          MaxWidth="610"
+                          Margin="0,18,0,0"
+                          HorizontalAlignment="Stretch"
+                          Visibility="Collapsed">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="LoadingMessageText"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Text="Reading and parsing the selected file safely…" />
+                            <ProgressBar Height="4"
+                                         Margin="0,9,16,0"
+                                         IsIndeterminate="True" />
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Click="CancelLoadingButton_Click"
+                                Content="Cancel"
+                                Style="{StaticResource SecondaryButtonStyle}" />
+                    </Grid>
+
+                    <Border x:Name="LoadStatusPanel"
+                            MaxWidth="610"
+                            Margin="0,18,0,0"
+                            Padding="16,14"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="10"
+                            Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock x:Name="LoadStatusTitleText"
+                                       FontSize="14"
+                                       FontWeight="SemiBold" />
+                            <TextBlock x:Name="LoadStatusSummaryText"
+                                       Margin="0,5,0,0"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource PrimaryTextBrush}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock x:Name="LoadStatusDetailText"
+                                       Margin="0,5,0,0"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="12"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AccentBrush}"
+                                   Text="HOW IT WORKS" />
+                        <TextBlock Margin="0,8,0,22"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Text="A safe, focused workflow" />
+
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="28" Height="28" Background="{DynamicResource AccentSoftBrush}" CornerRadius="14">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" Text="1" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock FontWeight="SemiBold" Text="Choose a file" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Text="You stay in control of access." TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="28" Height="28" Background="{DynamicResource AccentSoftBrush}" CornerRadius="14">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" Text="2" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock FontWeight="SemiBold" Text="Analyse locally" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Text="Nothing is uploaded or transmitted." TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="28" Height="28" Background="{DynamicResource AccentSoftBrush}" CornerRadius="14">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" Text="3" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock FontWeight="SemiBold" Text="Investigate clearly" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Text="Search, filter and inspect inert text." TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="28" Height="28" Background="{DynamicResource AccentSoftBrush}" CornerRadius="14">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" Text="4" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock FontWeight="SemiBold" Text="Export separately" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Text="Optional summaries never replace the source." TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,34,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="Read-only by design" />
+                        <TextBlock Margin="0,8,0,0" FontSize="13" Foreground="{DynamicResource SecondaryTextBrush}" LineHeight="19" Text="Selected source files are inspected without requesting write access." TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="Entirely offline" />
+                        <TextBlock Margin="0,8,0,0" FontSize="13" Foreground="{DynamicResource SecondaryTextBrush}" LineHeight="19" Text="No accounts, remote APIs, analytics or background network traffic." TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="4" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="Inert text display" />
+                        <TextBlock Margin="0,8,0,0" FontSize="13" Foreground="{DynamicResource SecondaryTextBrush}" LineHeight="19" Text="Commands, scripts and URLs in a log are displayed, never executed." TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Margin="0,24,0,0"
+                    Padding="18,14"
+                    Background="{DynamicResource AccentSoftBrush}"
+                    CornerRadius="10">
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="12"
+                           Foreground="#435173"
+                           Text="LogLens processes selected files locally on your device. Your files and their contents are never uploaded, transmitted or modified."
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

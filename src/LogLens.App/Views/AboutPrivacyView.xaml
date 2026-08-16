@@ -1,0 +1,187 @@
+<UserControl x:Class="LogLens.App.Views.AboutPrivacyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid Margin="52,44,52,40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="About &amp; Privacy" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}"
+                           Text="Understand what LogLens processes, stores locally and can safely erase." />
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="22" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="What LogLens does" />
+                        <TextBlock Margin="0,14,0,0"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   LineHeight="23"
+                                   Text="• Analyses only files you explicitly choose&#10;• Processes content locally on your device&#10;• Presents log text as inert, searchable information&#10;• Can restore one locally stored session"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="What LogLens does not do" />
+                        <TextBlock Margin="0,14,0,0"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   LineHeight="23"
+                                   Text="• No telemetry, uploads or networking&#10;• No automatic filesystem scanning&#10;• No administrator privileges&#10;• No antivirus or malware-removal claims"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="2" Margin="0,22,0,0" Style="{StaticResource CardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="Privacy commitment" />
+                        <TextBlock Margin="0,8,32,0"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   LineHeight="21"
+                                   Text="LogLens stores local application data in %LocalAppData%\LogLens so it can restore your previous session. This may include the original source path, parsed raw log entries and analysis state. It stays on this device, is never uploaded and can be erased below. Original logs and exported reports are never deleted by that action."
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Border Grid.Column="1"
+                            Padding="12,7"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource AccentSoftBrush}"
+                            CornerRadius="15">
+                        <TextBlock FontSize="12"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AccentBrush}"
+                                   Text="Version 0.1.0" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="3"
+                    Margin="0,22,0,0"
+                    Style="{StaticResource CardStyle}"
+                    automation:AutomationProperties.Name="Storage and Privacy status">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="28" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="Storage &amp; Privacy" />
+                        <TextBlock Margin="0,7,0,0"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   Text="One current-session snapshot only. No history library is created."
+                                   TextWrapping="Wrap" />
+                        <TextBlock Margin="0,18,0,0"
+                                   FontSize="11"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   Text="LOCAL STORAGE PATH" />
+                        <TextBox x:Name="StoragePathText"
+                                 Margin="0,5,0,0"
+                                 Padding="0"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 FontFamily="Consolas"
+                                 FontSize="12"
+                                 IsReadOnly="True"
+                                 IsTabStop="True"
+                                 TextWrapping="Wrap"
+                                 automation:AutomationProperties.Name="LogLens local storage path" />
+                        <Grid Margin="0,18,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="{DynamicResource SecondaryTextBrush}" Text="Session currently stored" />
+                            <TextBlock x:Name="StoredSessionText" Grid.Column="1" FontWeight="SemiBold" Text="Checking…" />
+                        </Grid>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="{DynamicResource SecondaryTextBrush}" Text="Approximate local size" />
+                            <TextBlock x:Name="StorageSizeText" Grid.Column="1" FontWeight="SemiBold" Text="Checking…" />
+                        </Grid>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="{DynamicResource SecondaryTextBrush}" Text="Raw parsed log lines stored" />
+                            <TextBlock x:Name="RawTextStoredText" Grid.Column="1" FontWeight="SemiBold" Text="Checking…" />
+                        </Grid>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="{DynamicResource SecondaryTextBrush}" Text="Recent export metadata stored" />
+                            <TextBlock x:Name="RecentExportMetadataText" Grid.Column="1" FontWeight="SemiBold" Text="No" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="Privacy boundaries" />
+                        <TextBlock Margin="0,12,0,0"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   LineHeight="22"
+                                   Text="Network storage: None&#10;Telemetry: None&#10;Cloud sync: None&#10;Accounts: None&#10;Original logs modified: Never&#10;Exported reports deleted: Never"
+                                   TextWrapping="Wrap" />
+                        <Border Margin="0,20,0,0"
+                                Padding="15"
+                                Background="{DynamicResource WarningSoftBrush}"
+                                CornerRadius="10">
+                            <StackPanel>
+                                <TextBlock FontWeight="SemiBold" Text="Erase only LogLens-owned data" />
+                                <TextBlock Margin="0,6,0,0"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource SecondaryTextBrush}"
+                                           Text="A four-stage confirmation explains the exact boundary before anything is deleted. Source logs and exported reports are outside that boundary."
+                                           TextWrapping="Wrap" />
+                                <Button x:Name="EraseAllDataButton"
+                                        Margin="0,14,0,0"
+                                        HorizontalAlignment="Left"
+                                        Click="EraseAllDataButton_Click"
+                                        Content="Erase All LogLens Data"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        automation:AutomationProperties.Name="Erase All LogLens Data"
+                                        automation:AutomationProperties.HelpText="Start a four-stage confirmation before erasing only LogLens-owned local application data" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="4"
+                    Margin="0,16,0,0"
+                    Padding="16,12"
+                    Background="{DynamicResource AccentSoftBrush}"
+                    CornerRadius="10">
+                <TextBlock x:Name="StorageStatusText"
+                           Foreground="{DynamicResource AccentBrush}"
+                           Text="Checking LogLens local storage…"
+                           TextWrapping="Wrap"
+                           automation:AutomationProperties.LiveSetting="Polite" />
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

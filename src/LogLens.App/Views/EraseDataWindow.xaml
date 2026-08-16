@@ -1,0 +1,170 @@
+<Window x:Class="LogLens.App.Views.EraseDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore"
+        Title="Erase All LogLens Data"
+        Width="650"
+        Height="540"
+        MinWidth="580"
+        MinHeight="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Background="{DynamicResource AppBackgroundBrush}"
+        automation:AutomationProperties.Name="Erase All LogLens Data confirmation">
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock x:Name="StepText"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource AccentBrush}"
+                       Text="STEP 1 OF 4" />
+            <TextBlock x:Name="StageTitleText"
+                       Margin="0,8,0,0"
+                       FontSize="25"
+                       FontWeight="SemiBold"
+                       Text="What will be erased" />
+            <TextBlock x:Name="StageSubtitleText"
+                       Margin="0,8,0,0"
+                       Foreground="{DynamicResource SecondaryTextBrush}"
+                       TextWrapping="Wrap"
+                       automation:AutomationProperties.LiveSetting="Polite" />
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Margin="0,24,0,24"
+                Padding="22"
+                Background="{DynamicResource CardBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <Grid>
+                <StackPanel x:Name="StageOnePanel">
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="LogLens-owned data that will be cleared" />
+                    <TextBlock Margin="0,14,0,0"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               LineHeight="24"
+                               Text="• The stored current-session snapshot&#10;• Parsed raw log entries held in that snapshot&#10;• Local analysis and filter/navigation state&#10;• Temporary or backup files inside the LogLens data folder"
+                               TextWrapping="Wrap" />
+                    <TextBlock Margin="0,18,0,0"
+                               FontWeight="SemiBold"
+                               Text="LogLens does not store recent export metadata in Version 1."
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <StackPanel x:Name="StageTwoPanel" Visibility="Collapsed">
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="Files that will remain untouched" />
+                    <TextBlock Margin="0,14,0,0"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               LineHeight="24"
+                               Text="• Original .log and .txt source files&#10;• Exported TXT and JSON reports&#10;• Documents, Desktop and project files&#10;• Files owned by Windows or other applications"
+                               TextWrapping="Wrap" />
+                    <Border Margin="0,20,0,0"
+                            Padding="14"
+                            Background="{DynamicResource SuccessSoftBrush}"
+                            CornerRadius="8">
+                        <TextBlock Foreground="{DynamicResource SuccessBrush}"
+                                   Text="Erase All LogLens Data never accepts a source or export path and cannot target files outside LogLens local app data."
+                                   TextWrapping="Wrap" />
+                    </Border>
+                </StackPanel>
+
+                <StackPanel x:Name="StageThreePanel" Visibility="Collapsed">
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="Exact storage boundary" />
+                    <TextBlock Margin="0,12,0,0"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Text="Only this app-owned folder will be inspected and cleared:"
+                               TextWrapping="Wrap" />
+                    <TextBox x:Name="StoragePathTextBox"
+                             Margin="0,14,0,0"
+                             Padding="12"
+                             Background="{DynamicResource AccentSoftBrush}"
+                             BorderThickness="0"
+                             FontFamily="Consolas"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             automation:AutomationProperties.Name="Exact LogLens local data storage boundary" />
+                    <CheckBox x:Name="StorageBoundaryCheckBox"
+                              Margin="0,22,0,0"
+                              Checked="StorageBoundaryCheckBox_Changed"
+                              Unchecked="StorageBoundaryCheckBox_Changed"
+                              Content="I understand that only this LogLens-owned local data location is affected."
+                              automation:AutomationProperties.Name="Confirm the LogLens storage boundary" />
+                </StackPanel>
+
+                <StackPanel x:Name="StageFourPanel" Visibility="Collapsed">
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="Final deliberate confirmation" />
+                    <TextBlock Margin="0,12,0,0"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Text="Type the following phrase exactly to enable the final erase action:"
+                               TextWrapping="Wrap" />
+                    <TextBlock Margin="0,16,0,0"
+                               FontFamily="Consolas"
+                               FontSize="17"
+                               FontWeight="SemiBold"
+                               Text="ERASE LOGLENS DATA" />
+                    <TextBox x:Name="ConfirmationPhraseTextBox"
+                             Margin="0,12,0,0"
+                             Padding="10"
+                             FontFamily="Consolas"
+                             FontSize="15"
+                             TextChanged="ConfirmationPhraseTextBox_TextChanged"
+                             automation:AutomationProperties.Name="Type ERASE LOGLENS DATA to confirm" />
+                    <TextBlock Margin="0,14,0,0"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Text="You can still cancel or go back. Nothing is deleted until you activate the enabled Erase LogLens Data button."
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BackButton"
+                    MinWidth="86"
+                    Click="BackButton_Click"
+                    Content="Back"
+                    IsEnabled="False"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    automation:AutomationProperties.Name="Go back one confirmation stage" />
+            <Button Grid.Column="2"
+                    MinWidth="86"
+                    Click="CancelButton_Click"
+                    Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    automation:AutomationProperties.Name="Cancel without erasing data" />
+            <Button x:Name="NextButton"
+                    Grid.Column="4"
+                    MinWidth="96"
+                    Click="NextButton_Click"
+                    Content="Continue"
+                    IsDefault="True"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    automation:AutomationProperties.Name="Continue to the next confirmation stage" />
+            <Button x:Name="EraseButton"
+                    Grid.Column="4"
+                    MinWidth="164"
+                    Click="EraseButton_Click"
+                    Content="Erase LogLens Data"
+                    IsEnabled="False"
+                    IsDefault="True"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Visibility="Collapsed"
+                    automation:AutomationProperties.Name="Erase LogLens Data now"
+                    automation:AutomationProperties.HelpText="Enabled only after the exact final confirmation phrase is entered" />
+        </Grid>
+    </Grid>
+</Window>
